@@ -804,7 +804,13 @@ export default function App() {
                 )}
                 {photo && evidence && (
                   <figure className="evidence-figure">
-                    <div className="evidence-photo">
+                    <div
+                      className="evidence-photo"
+                      style={{
+                        aspectRatio: `${photo.width}/${photo.height}`,
+                        width: `min(100%, ${(58 * photo.width) / photo.height}dvh)`,
+                      }}
+                    >
                       <img
                         src={assets(photo.src)}
                         alt={`${selected.title} outlined in ${photo.label}`}
