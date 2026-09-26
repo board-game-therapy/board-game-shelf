@@ -1,0 +1,37 @@
+name: Catalog suggestion
+description: Suggest a game, correct a detail, or improve photo evidence.
+title: "[Library] "
+body:
+  - type: markdown
+    attributes:
+      value: "Suggestions are reviewed before changing the library. Please omit personal information."
+  - type: input
+    id: game
+    attributes:
+      label: Game title or catalog key
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: What needs updating?
+      options:
+        - Add a game
+        - Game details
+        - Player count or play time
+        - Tags
+        - Photo or identification
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested change
+      description: What should change, and how can it be checked?
+    validations:
+      required: true
+  - type: input
+    id: reference
+    attributes:
+      label: Public photo or reference URL

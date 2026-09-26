@@ -1,0 +1,20 @@
+{
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  "name": "bgt-library-proposals",
+  "main": "worker.ts",
+  "compatibility_date": "2026-09-26",
+  "workers_dev": true,
+  "observability": { "enabled": false },
+  "vars": {
+    "ALLOWED_ORIGIN": "https://board-game-therapy.github.io",
+    "GITHUB_REPOSITORY": "board-game-therapy/board-game-shelf",
+  },
+  "ratelimits": [
+    { "name": "PER_VISITOR", "namespace_id": "1001", "simple": { "limit": 3, "period": 60 } },
+    {
+      "name": "TOTAL_SUBMISSIONS",
+      "namespace_id": "1002",
+      "simple": { "limit": 10, "period": 60 },
+    },
+  ],
+}

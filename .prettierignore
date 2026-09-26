@@ -1,0 +1,6 @@
+src/catalog.generated.json
+public/catalog.yaml
+public/catalog-index.json
+node_modules
+dist
+outputs
