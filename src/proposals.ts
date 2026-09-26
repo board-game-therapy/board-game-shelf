@@ -14,8 +14,19 @@ export function newProposal(game: Game | undefined, revision: number): Proposal 
     gameKey: game?.key || '',
     title: game?.title || '',
     category: game ? 'Game details' : 'Add a game',
-    details: '',
-    photoUrl: '',
+    details: game
+      ? [
+          `Summary: ${game.summary}`,
+          `Description: ${game.description}`,
+          `Players: ${game.players ? `${game.players.min}–${game.players.max}` : 'Not checked'}`,
+          `Play time (minutes): ${game.minutes ? `${game.minutes.min}–${game.minutes.max}` : 'Not checked'}`,
+          `Minimum age: ${game.minAge ?? 'Not checked'}`,
+          `Tags: ${game.tags.join(', ')}`,
+          '',
+          'Reason for change: ',
+        ].join('\n\n')
+      : '',
+    photoUrl: game?.reference?.url || '',
     revision,
   };
 }

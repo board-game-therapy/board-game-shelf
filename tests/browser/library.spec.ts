@@ -51,6 +51,8 @@ test('contextual proposal is reviewable, downloadable, and does not post before 
   await page.goto('./#game=azul');
   await page.getByRole('button', { name: 'Suggest a correction', exact: true }).click();
   await expect(page.getByLabel('Game title', { exact: true })).toHaveValue('Azul');
+  await expect(page.getByLabel('Your suggestion')).toHaveValue(/Players: 2–4/);
+  await expect(page.getByLabel('Public photo or reference link')).toHaveValue(/boardgamegeek/);
   await page.getByLabel('Your suggestion').fill('Please verify this edition and its player count.');
   await page.getByRole('button', { name: 'Review suggestion' }).click();
   await expect(page.locator('.proposal-preview')).toContainText('Game key: azul');
@@ -90,4 +92,32 @@ test('annotation tool loads known keys and keeps selection local', async ({ page
   await page.getByRole('button', { name: 'Add region to proposal' }).click();
   await expect(page.locator('#output')).toHaveValue(/key: "dixit"/);
   await expect(page.locator('#output')).toHaveValue(/photoId: "test-photo"/);
+});
+
+test('footer links and anonymous submission preserve the edited game context', async ({ page }) => {
+  await page.route('**/proposals', async (route) => {
+    const proposal = route.request().postDataJSON();
+    expect(proposal.gameKey).toBe('azul');
+    expect(proposal.details).toContain('Updated description for maintainer review.');
+    await route.fulfill({
+      json: { url: 'https://github.com/board-game-therapy/board-game-shelf/issues/123' },
+    });
+  });
+  await page.goto('./');
+  await expect(page.locator('header').getByRole('button', { name: /Suggest/ })).toHaveCount(0);
+  await expect(
+    page.locator('footer').getByRole('link', { name: 'View source on GitHub' }),
+  ).toHaveAttribute('href', 'https://github.com/board-game-therapy/board-game-shelf');
+  await page.goto('./#game=azul');
+  await page.getByRole('button', { name: 'Suggest a correction', exact: true }).click();
+  await page.getByLabel('Your suggestion').fill('Updated description for maintainer review.');
+  await page.getByRole('button', { name: 'Review suggestion' }).click();
+  const submit = page.getByRole('button', { name: 'Submit suggestion', exact: true });
+  if (await submit.count()) {
+    await submit.click();
+    await expect(page.getByRole('link', { name: 'View your suggestion' })).toHaveAttribute(
+      'href',
+      'https://github.com/board-game-therapy/board-game-shelf/issues/123',
+    );
+  }
 });

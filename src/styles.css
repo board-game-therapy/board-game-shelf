@@ -1529,3 +1529,32 @@ mark {
   height: 100%;
   object-fit: contain;
 }
+
+.footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  color: var(--teal);
+}
+.icon-button:hover {
+  background: var(--soft);
+}
+.correction-button {
+  margin-left: auto;
+}
+@media (max-width: 650px) {
+  .footer-actions {
+    width: 100%;
+    justify-content: space-between;
+    gap: 10px;
+  }
+}

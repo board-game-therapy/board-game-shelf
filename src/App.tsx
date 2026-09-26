@@ -11,7 +11,8 @@ import {
   Download,
   ExternalLink,
   Gamepad2,
-  Plus,
+  Github,
+  Pencil,
   Search,
   SlidersHorizontal,
   Users,
@@ -403,9 +404,6 @@ export default function App() {
           </a>
           <nav aria-label="Main navigation">
             <span className="nav-current">Game library</span>
-            <button className="suggest-button" onClick={() => suggest()}>
-              <Plus size={16} /> Suggest an update
-            </button>
           </nav>
         </div>
       </header>
@@ -674,9 +672,21 @@ export default function App() {
             <strong>Board Game Therapy</strong>
             <span>Purposeful play, conversation, and connection.</span>
           </div>
-          <button className="text-button" onClick={() => suggest()}>
-            Something missing? Suggest an update <ArrowRight size={14} />
-          </button>
+          <div className="footer-actions">
+            <button className="text-button" onClick={() => suggest()}>
+              Something missing? Suggest an update <ArrowRight size={14} />
+            </button>
+            <a
+              className="icon-button"
+              href="https://github.com/board-game-therapy/board-game-shelf"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="View source on GitHub"
+              title="View source on GitHub"
+            >
+              <Github size={20} aria-hidden="true" />
+            </a>
+          </div>
         </footer>
       </main>
       <Dialog.Root
@@ -748,8 +758,13 @@ export default function App() {
                         Game reference <ExternalLink size={13} />
                       </a>
                     )}
-                    <button className="text-button" onClick={() => suggest(selected)}>
-                      Suggest a correction
+                    <button
+                      className="icon-button correction-button"
+                      onClick={() => suggest(selected)}
+                      aria-label="Suggest a correction"
+                      title="Suggest a correction"
+                    >
+                      <Pencil size={16} aria-hidden="true" />
                     </button>
                   </div>
                   {selected.image && (
@@ -901,7 +916,7 @@ export default function App() {
                           disabled={sending}
                           onClick={() => void submit()}
                         >
-                          {sending ? 'Sending…' : 'Send anonymously'} <ArrowRight size={15} />
+                          {sending ? 'Sending…' : 'Submit suggestion'} <ArrowRight size={15} />
                         </button>
                       ) : (
                         <button className="primary-button" onClick={download}>
@@ -971,11 +986,16 @@ export default function App() {
                     </label>
                     <label>
                       Your suggestion
+                      {selected && (
+                        <span className="form-hint">
+                          Edit the current details below and explain your change.
+                        </span>
+                      )}
                       <textarea
                         required
                         minLength={10}
                         maxLength={3000}
-                        rows={4}
+                        rows={selected ? 12 : 4}
                         value={proposal.details}
                         onChange={(e) => setProposal({ ...proposal, details: e.target.value })}
                         placeholder={
