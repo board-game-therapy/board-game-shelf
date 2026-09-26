@@ -1,0 +1,18 @@
+export const initialGames: Array<[string, string, string?]> = [
+  ["Risk: Godstorm","confirmed"],["Brainspin","confirmed"],["Azul","confirmed"],
+  ["7 Wonders","confirmed"],["Camel Up","confirmed"],["Sheriff of Nottingham","confirmed"],
+  ["Oceanos","confirmed"],["Gloomhaven: Jaws of the Lion","confirmed"],["Codenames Duet","confirmed"],
+  ["Shadows Over Camelot","confirmed"],["Paint the Roses","confirmed"],["Pandemic Legacy: Season 1","confirmed"],
+  ["Splendor","confirmed"],["Exploding Kittens","confirmed"],["Deception: Murder in Hong Kong","confirmed"],
+  ["Lost Ruins of Arnak","confirmed"],["Tales of the Arabian Nights","confirmed"],["Gloomhaven","confirmed"],
+  ["Coup","confirmed"],["The Crew: Mission Deep Sea","confirmed"],["Dixit","confirmed"],
+  ["Dixit: Disney Edition","confirmed"],["Citadels","confirmed"],["Biblios","confirmed"],
+  ["Sushi Go!","confirmed"],["Century: Golem Edition","confirmed"],["The Blood of an Englishman","confirmed"],
+  ["The Castles of Burgundy","confirmed"],["Catan","confirmed"],["The Fox in the Forest","confirmed"],
+  ["Codenames","confirmed"],["Concept","confirmed"],["Landmarks","confirmed"],
+  ["Onitama","confirmed"],["Forbidden Island","confirmed"],["The Crew: The Quest for Planet Nine","confirmed"],
+  ["7 Wonders Duel","confirmed"],["Sheriff of Nottingham: Merry Men","confirmed","expansion"],
+  ["Cartographers Heroes","confirmed"],["ito","confirmed"],
+  ["Greater Than Games box","uncertain"],["White and green box near Azul","uncertain"],
+  ["Small boxes on lower shelves","uncertain"],
+];
